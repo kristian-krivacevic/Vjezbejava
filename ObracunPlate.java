@@ -1,22 +1,24 @@
 package PosleKolok;
-import java.util.ArrayList;
 public class ObracunPlate {
-	 String mjesec;
-	    int godina;
+private int mjesec;
+private int godina;
+private Zaposleni zaposleni;
+private double iznos;
+private String napomena;
 
-	    public ObracunPlate(String mjesec, int godina) {
-	        this.mjesec = mjesec;
-	        this.godina = godina;
-	    }
 
-	    public void generisi(ArrayList<Zaposleni> lista) {
-	        System.out.println("Obracun plata za: " + mjesec + " " + godina);
-	        System.out.println("---------------------------------------------");
+public ObracunPlate(int mjesec, int godina, Zaposleni zaposleni, double iznos, String napomena) {
+this.mjesec = mjesec;
+this.godina = godina;
+this.zaposleni = zaposleni;
+this.iznos = iznos;
+this.napomena = napomena;
+}
 
-	        for (Zaposleni z : lista) {
-	            double iznos = z.obracunPlate();
-	            System.out.println(z.id + " " + z.ime + " " + z.prezime + " -> " + iznos);
-	        }
-	    }
-	}
 
+public int getMjesec() { return mjesec; }
+public int getGodina() { return godina; }
+public Zaposleni getZaposleni() { return zaposleni; }
+public double getIznos() { return iznos; }
+public String getNapomena() { return napomena; }
+}

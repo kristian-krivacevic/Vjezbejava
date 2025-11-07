@@ -1,34 +1,36 @@
 package PosleKolok;
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.Duration;
+import java.util.List;
+
+
 public class Smjena {
-	String tipSmjene;
-    String datum;
+public enum TipSmjene { JUTARNJA, POPODNEVNA, NOĆNA }
 
-    public Smjena(String tipSmjene, String datum) {
-        this.tipSmjene = tipSmjene;
-        this.datum = datum;
-    }
+
+private LocalDate datum;
+private LocalTime pocetak;
+private LocalTime kraj;
+private TipSmjene tip;
+private List<Zaposleni> zaposleni;
+
+
+public Smjena(LocalDate datum, LocalTime pocetak, LocalTime kraj, TipSmjene tip, List<Zaposleni> zaposleni) {
+this.datum = datum;
+this.pocetak = pocetak;
+this.kraj = kraj;
+this.tip = tip;
+this.zaposleni = zaposleni;
 }
 
-class Restoran {
-    String naziv;
-    ArrayList<Zaposleni> zaposleni;
 
-    public Restoran(String naziv) {
-        this.naziv = naziv;
-        zaposleni = new ArrayList<>();
-    }
-
-    public void dodajZaposlenog(Zaposleni z) {
-        zaposleni.add(z);
-    }
-
-    public void obrachunPlate() {
-        System.out.println("ID\tIme\tPrezime\tTip\tSati\tPlata");
-        for (Zaposleni z : zaposleni) {
-            System.out.println(z.id + "\t" + z.ime + "\t" + z.prezime + "\t" + z.tipZaposlenog() + "\t" +
-                    z.ukupanBrojSati + "\t" + String.format("%.2f", z.obracunPlate()));
-        }
-    }
+public double trajanjeSati() {
+long minute = Duration.between(pocetak, kraj).toMinutes();
+if (minute < 0) minute += 24 * 60;
+return minute / 60.0;
 }
 
+
+public List<Zaposleni> getZaposleni() { return zaposleni; }
+}
